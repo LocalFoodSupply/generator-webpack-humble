@@ -109,7 +109,6 @@ if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
 
   config.output = {
     path: path.join(__dirname, 'app/dist'),
-    publicPath: path.resolve(__dirname),
     filename: 'js/[name].bundle.js'
   };
 
