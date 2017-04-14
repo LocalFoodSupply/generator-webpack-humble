@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url":""
+    "url":"git+https://github.com/dxcqcv/generator-webpack-humble.git"
   },
   "dependencies": {
     "yeoman-generator": "~1.1.1",
