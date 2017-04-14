@@ -1,6 +1,6 @@
 {
   "name": "generator-webpack-humble",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Create a web server using Pug(Jade) + Stylus + ES6 + Webpack dev server.",
   "files": [
     "generators"
