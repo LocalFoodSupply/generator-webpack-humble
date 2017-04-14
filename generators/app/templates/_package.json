@@ -4,8 +4,8 @@
   "description": "write demo with pug, stylus and ES6",
   "private": true,
   "scripts": {
-    "dev": "<% if(isWin === true) { %> set NODE_ENV=development <% } else { %> NODE_ENV=development <% } %> webpack-dev-server",
-    "build": "<% if(isWin === true) { %> set NODE_ENV=production <% } else { %> NODE_ENV=production <% } %> webpack  --display-error-details"
+    "dev": "cross-env NODE_ENV=development webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack  --display-error-details"
   },
   "license": "MIT",
   "author": "Roy Shang",
@@ -13,6 +13,7 @@
     "babel-runtime": "~6.23.0"
   },
   "devDependencies": {
+    "cross-env": "~4.0.0",
     "autoprefixer": "~6.7.7",
     "babel-core": "^6.24.1",
     "babel-loader": "~6.4.1",
