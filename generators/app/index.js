@@ -2,6 +2,7 @@
 const Generator = require('yeoman-generator');
 const yosay = require( 'yosay');
 const path = require('path');
+const os = require('os');
 
 
 module.exports = class extends Generator {
@@ -18,6 +19,7 @@ module.exports = class extends Generator {
     this.log(yosay('Welcome!!!\n Write Demo with pug, stylus and ES6 '));
     this.data = {
       appName: path.basename(process.cwd()),
+      isWin: os.platform() === 'win32'
     };
   }
 

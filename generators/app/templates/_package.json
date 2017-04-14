@@ -1,11 +1,11 @@
 {
   "name": "<%= appName %>",
-  "version": "0.0.1",
+  "version": "0.0.4",
   "description": "write demo with pug, stylus and ES6",
   "private": true,
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server",
-    "build": "NODE_ENV=production webpack  --display-error-details"
+    "dev": "<% if(isWin === true) { %> set NODE_ENV=development <% } else { %> NODE_ENV=development <% } %> webpack-dev-server",
+    "build": "<% if(isWin === true) { %> set NODE_ENV=production <% } else { %> NODE_ENV=production <% } %> webpack  --display-error-details"
   },
   "license": "MIT",
   "author": "Roy Shang",

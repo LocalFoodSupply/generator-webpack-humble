@@ -7,20 +7,20 @@ Create a web server using Pug(Jade) + Stylus + ES6 + Webpack dev server.
 ## Installation
 
 ```sh
-    $npm install -g generator-webpack-humble  
+$npm install -g generator-webpack-humble  
 ```
 
 ## Usage
 
 ```sh
-    $ yo webpack-humble
+$ yo webpack-humble
 ```
 
 ## Npm commands list
 
 ```sh
-    $ npm dev # Launches the server
-    $ npm build # Built the files
+$ npm run dev # Launches the server
+$ npm run build # Built the files
 ```
 
 ## Structure
