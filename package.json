@@ -16,7 +16,7 @@
     "stylus",
     "ES6",
     "yeoman",
-    "[\"yeoman-generator\"]"
+    "yeoman-generator"
   ],
   "author": "Roy Shang",
   "license": "MIT",
