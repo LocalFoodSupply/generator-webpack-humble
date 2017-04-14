@@ -1,6 +1,6 @@
 {
   "name": "generator-webpack-humble",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Create a web server using Pug(Jade) + Stylus + ES6 + Webpack dev server.",
   "files": [
     "generators"
@@ -22,7 +22,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url":"git+https://github.com/dxcqcv/generator-webpack-humble.git"
+    "url": "git+https://github.com/dxcqcv/generator-webpack-humble.git"
   },
   "dependencies": {
     "yeoman-generator": "~1.1.1",
