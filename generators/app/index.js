@@ -72,7 +72,7 @@ module.exports = class extends Generator {
   }
 
   install() {
-    this.npmInstall();
+    this.yarnInstall();
   }
 
 

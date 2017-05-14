@@ -9,6 +9,9 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const BabiliPlugin = require('babili-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const DefinePlugin = require('webpack/lib/DefinePlugin');
+
 
 // VARS
 const NODE_ENV = process.env.NODE_ENV;
@@ -26,8 +29,15 @@ const rules = {
     use: [{
       loader: 'babel-loader',
       options: {
-        plugins: ['transform-runtime'],
-        presets: ['es2015']
+        plugins: [
+          'transform-object-assign',
+          'transform-es2015-destructuring',
+          'transform-es2015-arrow-functions',
+          'transform-es2015-spread',
+          'transform-es2015-template-literals',
+          'transform-es2015-shorthand-properties',
+          'transform-object-set-prototype-of-to-assign',
+        ],
       }
     }],
     exclude: /node_modules/,
@@ -103,7 +113,7 @@ config.plugins = [
 // DEVELOPMENT or PRODUCTION
 if (ENV_DEVELOPMENT || ENV_PRODUCTION) {
   config.entry = {
-    index:['babel-polyfill',path.resolve(__dirname, 'app/src/js/index.js')] ,
+    index:path.resolve(__dirname, 'app/src/js/index.js') ,
     other: path.resolve(__dirname, 'app/src/js/other.js')
   };
 
@@ -152,7 +162,7 @@ if (ENV_DEVELOPMENT) {
 if(ENV_PRODUCTION) {
   config.devtool = 'hidden-source-map';
 
-  config.output.filename = 'js/[name].[chunkhash].js';
+  config.output.filename = 'js/[name].[chunkhash:8].js';
 
   config.module.rules.push({
     test: /\.(styl|css)/,
@@ -165,9 +175,16 @@ if(ENV_PRODUCTION) {
 
   config.plugins.push(
     new CleanWebpackPlugin(['app/dist/js','app/dist/css']),
-    new ExtractTextPlugin({
-      filename: 'css/[name].[chunkhash].css'
+    new DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
     }),
-    new BabiliPlugin()
+    new ExtractTextPlugin({
+      filename: 'css/[name].[chunkhash:8].css'
+    }),
+    new BabiliPlugin(),
+    new BundleAnalyzerPlugin()
+
   );
 }
