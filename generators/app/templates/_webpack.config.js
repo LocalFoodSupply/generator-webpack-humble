@@ -52,7 +52,22 @@ const rules = {
     exclude: /node_modules/,
     use: ['style-loader','css-loader', 'postcss-loader', 'stylus-loader']
   },
-  
+  img: {
+    test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+    loader: 'url-loader',
+    options: {
+      limit: 1000,
+      name: 'img/[name].[ext]'
+    }
+  },
+  fonts: {
+    test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+    loader: 'url-loader',
+    options: {
+      limit: 1000,
+      name: 'fonts/[name].[hash:7].[ext]'
+    }
+  }, 
   json: {
     test: /\.json$/,
     use: ['json-loader'] 
@@ -72,6 +87,8 @@ config.module = {
   rules: [
     rules.js,
     rules.html,
+    rules.img,
+    rules.fonts,
     rules.json
   ]
 };
@@ -169,6 +186,7 @@ if(ENV_PRODUCTION) {
     include: path.join(__dirname,'app/src/css'),
     use: ExtractTextPlugin.extract({
       fallback: 'style-loader',
+      publicPath: '../',
       use: ['css-loader', 'postcss-loader', 'stylus-loader']
     })
   });
