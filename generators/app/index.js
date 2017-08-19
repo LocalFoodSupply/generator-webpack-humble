@@ -62,6 +62,10 @@ module.exports = class extends Generator {
       this.destinationPath('app/src/js/index.js')
     );
     this.fs.copy(
+      this.templatePath('app/src/img/hope.jpg'),
+      this.destinationPath('app/src/img/hope.jpg')
+    );
+    this.fs.copy(
       this.templatePath('app/src/js/other.js'),
       this.destinationPath('app/src/js/other.js')
     );
