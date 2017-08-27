@@ -4,6 +4,13 @@
 
 Create a web server using Pug(Jade) + Stylus + ES6 + Webpack dev server.
 
+## Feature
+- Support browserSync
+- Postcss plugin SVG, VW, Aspect-Ratio out of box
+- Support Pug
+- Support Stylus
+- Support ES6
+
 ## Installation
 
 ```sh
