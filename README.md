@@ -12,7 +12,7 @@ Create a web server using Pug(Jade) + Stylus + ES6 + Webpack dev server.
 - Support ES6
 
 
-## Requires
+## Requirements
 - yeoman
 ```sh
 $ npm install -g yo
