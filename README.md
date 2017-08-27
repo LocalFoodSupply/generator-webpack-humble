@@ -4,17 +4,27 @@
 
 Create a web server using Pug(Jade) + Stylus + ES6 + Webpack dev server.
 
-## Feature
+## Features
 - Support browserSync
 - Postcss plugin SVG, VW, Aspect-Ratio out of box
 - Support Pug
 - Support Stylus
 - Support ES6
 
+
+## Requires
+- yeoman
+```sh
+$ npm install -g yo
+```
+- yarn
+```
+https://yarnpkg.com/en/docs/install#windows-tab
+```
+
 ## Installation
 
 ```sh
-$ npm install -g yo
 $ npm install -g generator-webpack-humble  
 ```
 
