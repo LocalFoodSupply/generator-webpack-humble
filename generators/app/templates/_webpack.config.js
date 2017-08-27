@@ -1,16 +1,21 @@
 //process.traceDeprecation = true;
 const path = require('path');
 const autoprefixer = require('autoprefixer');
+const px2viewport = require('postcss-px-to-viewport');
+const aspectRatio = require('postcss-aspect-ratio-mini');
+const writeSvg = require('postcss-write-svg');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin');
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin');
+const ProvidePlugin = require('webpack/lib/ProvidePlugin');
 const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
-const BabiliPlugin = require('babili-webpack-plugin');
+const MinifyPlugin = require("babel-minify-webpack-plugin");
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const DefinePlugin = require('webpack/lib/DefinePlugin');
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin')
 
 
 // VARS
@@ -21,6 +26,7 @@ const ENV_PRODUCTION = NODE_ENV === 'production';
 
 const HOST = 'localhost';
 const PORT = '9988';
+
 
 // LOADERS
 const rules = {
@@ -94,12 +100,27 @@ config.module = {
 };
 
 config.plugins = [
+  new ProvidePlugin({
+  }),
   new LoaderOptionsPlugin({
     debug: false,
     minimize: ENV_PRODUCTION,
     options: {
       postcss: [
-        autoprefixer()
+        autoprefixer({
+          browsers: "android >= 4.4"
+        }),
+        px2viewport({
+          viewportWidth: 750,
+          viewportHeight: 1670,
+          unitPrecision: 5,
+          viewportUnit: 'vw',
+          selectorBlackList: [],
+          minPixelValue: 1,
+          mediaQuery: false
+        }),
+        writeSvg(),
+        aspectRatio() 
       ]
     }
   }),
@@ -109,7 +130,7 @@ config.plugins = [
     filename: path.resolve(__dirname, 'app/dist/index.html'),
     hash: false,
     alwaysWriteToDisk: true,
-    inject: 'body',
+    inject: true,
     chunks: ['index'],
     template: path.resolve(__dirname, 'app/src/index.pug')
   }),
@@ -119,11 +140,16 @@ config.plugins = [
     filename: path.resolve(__dirname, 'app/dist/other.html'),
     hash: false,
     alwaysWriteToDisk: true,
-    inject: 'body',
+    inject: true,
     chunks: ['other'],
     template: path.resolve(__dirname, 'app/src/other.pug')
   }),
   new HtmlWebpackHarddiskPlugin(),
+    new BrowserSyncPlugin({
+    host: 'localhost',
+    port: 3000,
+    proxy: 'http://localhost:9988/'
+  })
 
 ];
 
@@ -173,11 +199,12 @@ if (ENV_DEVELOPMENT) {
       version: false
     }
   };
+
 }
 
 // PRODUCTION 
 if(ENV_PRODUCTION) {
-  config.devtool = 'hidden-source-map';
+  config.devtool = false;
 
   config.output.filename = 'js/[name].[chunkhash:8].js';
 
@@ -192,7 +219,7 @@ if(ENV_PRODUCTION) {
   });
 
   config.plugins.push(
-    new CleanWebpackPlugin(['app/dist/js','app/dist/css']),
+    new CleanWebpackPlugin(['app/dist/js','app/dist/css', 'app/log/*']),
     new DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
@@ -201,8 +228,12 @@ if(ENV_PRODUCTION) {
     new ExtractTextPlugin({
       filename: 'css/[name].[chunkhash:8].css'
     }),
-    new BabiliPlugin(),
-    new BundleAnalyzerPlugin()
 
+    new MinifyPlugin(), 
+    new BundleAnalyzerPlugin({
+      analyzerMode: 'static',
+      reportFilename: '../log/report.html',
+      openAnalyzer: true
+    })
   );
 }

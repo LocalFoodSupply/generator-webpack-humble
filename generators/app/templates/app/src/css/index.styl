@@ -4,3 +4,26 @@
 
 body
   background yellow url('../img/hope.jpg') center no-repeat;
+
+@svg bb 
+	@rect 
+		fill var(--color, black)
+		width 100%
+		height 100%
+		
+.testSVG
+	width 100px 
+	height 100px
+	border 1px solid transparent
+	border-image svg(bb param(--color #3399cc)) 2 2 stretch
+
+.testVW
+  width 100px
+  height 100px
+
+.testAspectRatio
+  position relative
+  aspect-ratio '16:9'
+  &::before
+    content ''
+
