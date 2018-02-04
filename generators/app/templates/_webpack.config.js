@@ -95,9 +95,13 @@ config.plugins = [
     options: {
       postcss: [
         autoprefixer({
-          "browserslist": ["last 2 versions", "ie 9", "safari >= 7"],
-          "ios": "8",
-          "android": "4.4"
+          browsers: [
+            '>1%',
+            'last 4 versions',
+            'Firefox ESR',
+            'not ie < 9', // React doesn't support IE8 anyway
+          ],
+          flexbox: 'no-2009',
         }),
         px2viewport({
           viewportWidth: 750,
