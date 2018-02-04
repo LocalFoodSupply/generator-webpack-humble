@@ -1,0 +1,16 @@
+{
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": ["last 2 versions", "ie 9", "safari >= 7"],
+        "ios": "8",
+        "android": "4.4"
+      },
+      "modules": false,
+      "debug": true,
+      "useBuiltIns": true,
+      "include": [],
+      "exclude": []
+    }]
+  ]
+}

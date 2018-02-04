@@ -32,20 +32,7 @@ const PORT = '9988';
 const rules = {
   js: {
     test: /\.js?$/,
-    use: [{
-      loader: 'babel-loader',
-      options: {
-        plugins: [
-          'transform-object-assign',
-          'transform-es2015-destructuring',
-          'transform-es2015-arrow-functions',
-          'transform-es2015-spread',
-          'transform-es2015-template-literals',
-          'transform-es2015-shorthand-properties',
-          'transform-object-set-prototype-of-to-assign',
-        ],
-      }
-    }],
+    use: ['babel-loader'] ,
     exclude: /node_modules/,
   },
   html: {
@@ -108,7 +95,9 @@ config.plugins = [
     options: {
       postcss: [
         autoprefixer({
-          browsers: "android >= 4.4"
+          "browserslist": ["last 2 versions", "ie 9", "safari >= 7"],
+          "ios": "8",
+          "android": "4.4"
         }),
         px2viewport({
           viewportWidth: 750,
@@ -219,7 +208,7 @@ if(ENV_PRODUCTION) {
   });
 
   config.plugins.push(
-    new CleanWebpackPlugin(['app/dist/js','app/dist/css', 'app/log/*']),
+    new CleanWebpackPlugin(['app/dist/js','app/dist/css', 'app/log/*', 'app/dist/img']),
     new DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify('production')

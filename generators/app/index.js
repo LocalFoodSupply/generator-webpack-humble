@@ -48,6 +48,10 @@ module.exports = class extends Generator {
       this.templatePath('_webpack.config.js'),
       this.destinationPath('webpack.config.js')
     );
+    this.fs.copy(
+      this.templatePath('_babelrc'),
+      this.destinationPath('.babelrc')
+    );
     // copy and move app folder
     this.fs.copy(
       this.templatePath('app/src/index.pug'),
